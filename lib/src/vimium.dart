@@ -59,7 +59,10 @@ enum VimumAction {
 /// that your UI package creates while also still being within the app. For material_ui
 /// this is can be solved by using the builder parameter of MaterialApp.
 class const Vimium({
-  /// Key used to activate hints overlay
+  /// Active set of shortcuts for Vimium.
+  ///
+  /// If you only want to enable hint navigation you can use
+  /// [Vimium.hintNavigationShortcuts].
   final Map<SingleActivator, VimumAction> shortcuts = const {
     SingleActivator(.keyF): .activateHintOverlay,
     SingleActivator(.keyH): .scrollLeft,
