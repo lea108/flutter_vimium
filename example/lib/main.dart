@@ -56,8 +56,11 @@ class _ExampleAppState extends State<ExampleApp> {
   ) {
     final matchedText = hint.substring(0, nMatchedChars);
     final remainingText = hint.substring(nMatchedChars, hint.length);
-    final remainingStyle = TextTheme.of(context).bodyLarge!.copyWith(fontWeight: .bold);
-    final matchedStyle = remainingStyle.copyWith(color: Colors.grey[700]!.withAlpha(155));
+    final remainingStyle = TextTheme.of(context).bodyLarge!
+        .copyWith(fontWeight: .bold);
+    final matchedStyle = remainingStyle.copyWith(
+      color: Colors.grey[700]!.withAlpha(155),
+    );
     return Badge(
       backgroundColor: Colors.purple[100],
       textColor: Colors.black,
@@ -194,20 +197,27 @@ Future<String> _getHomeRow() async {
   final layout = layoutManager.currentLayout;
 
   final physicalHomeRow = [
-      PhysicalKeyboardKey.keyA,
-      PhysicalKeyboardKey.keyS,
-      PhysicalKeyboardKey.keyD,
-      PhysicalKeyboardKey.keyF,
-      PhysicalKeyboardKey.keyG,
-      PhysicalKeyboardKey.keyH,
-      PhysicalKeyboardKey.keyJ,
-      PhysicalKeyboardKey.keyK,
-      PhysicalKeyboardKey.keyL,
-      PhysicalKeyboardKey.semicolon,
+    PhysicalKeyboardKey.keyA,
+    PhysicalKeyboardKey.keyS,
+    PhysicalKeyboardKey.keyD,
+    PhysicalKeyboardKey.keyF,
+    PhysicalKeyboardKey.keyG,
+    PhysicalKeyboardKey.keyH,
+    PhysicalKeyboardKey.keyJ,
+    PhysicalKeyboardKey.keyK,
+    PhysicalKeyboardKey.keyL,
+    PhysicalKeyboardKey.semicolon,
   ];
 
-  final logicalHomeRow = physicalHomeRow.map((pk) => layout.getLogicalKeyForPhysicalKey(pk));
+  final logicalHomeRow = physicalHomeRow.map(
+    (pk) => layout.getLogicalKeyForPhysicalKey(pk),
+  );
 
-  final homeRow = logicalHomeRow.map((lk) => lk?.keyLabel).nonNulls.where((s) => s.toLowerCase() != s.toUpperCase()).join().toLowerCase();
+  final homeRow = logicalHomeRow
+      .map((lk) => lk?.keyLabel)
+      .nonNulls
+      .where((s) => s.toLowerCase() != s.toUpperCase())
+      .join()
+      .toLowerCase();
   return homeRow.length >= 5 ? homeRow : fallback;
 }

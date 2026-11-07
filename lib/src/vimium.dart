@@ -56,6 +56,7 @@ class const Vimium({
 
   /// Initial delay before input repetition for select VimiumActions
   final Duration initialRepeatDelay = const Duration(milliseconds: 800),
+
   /// Repeat delay after initial repeat delay for select VimiumActions
   final Duration repeatDelay = const Duration(milliseconds: 300),
 

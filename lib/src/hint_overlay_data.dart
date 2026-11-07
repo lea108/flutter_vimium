@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 
 class HintOverlayData({
@@ -8,7 +7,10 @@ class HintOverlayData({
   required final FocusNode target,
 });
 
-HintOverlayData? findMatchingOverlay(List<HintOverlayData> overlays, String typedText) {
+HintOverlayData? findMatchingOverlay(
+  List<HintOverlayData> overlays,
+  String typedText,
+) {
   try {
     return overlays.firstWhere((o) => o.hint == typedText);
   } on StateError {

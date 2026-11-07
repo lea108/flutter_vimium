@@ -31,7 +31,11 @@ class const HintsOverlay({
             left: hint.rect.left + offset.dx,
             top: hint.rect.top + offset.dy,
             child: overlayBuilder != null
-                ? overlayBuilder!(context, hint.hint.toUpperCase(), nMatchedChars)
+                ? overlayBuilder!(
+                    context,
+                    hint.hint.toUpperCase(),
+                    nMatchedChars,
+                  )
                 : _buildDefaultOverlay(context, hint, nMatchedChars),
           );
         }),
