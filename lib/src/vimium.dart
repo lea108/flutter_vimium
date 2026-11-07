@@ -37,7 +37,7 @@ enum VimumAction {
 ///  * [shortcuts] redefine keyboard shortcuts
 ///  * [hintCharacters] define the letters that may be used in alphabet hints.
 ///  * [hintOverlayBuilder] provide a custom builder for the hint overlays.
-///  * [offset] offset from FocusNode.rect top left corner for overlays.
+///  * [hintOffset] offset from FocusNode.rect top left corner for overlays.
 ///  * [autofocus] allow disabling autofocus on Focus node created.
 ///  * [onHintActivate] provides ability to intercept/handle activated hints yourself.
 class const Vimium({
@@ -76,7 +76,7 @@ class const Vimium({
   hintOverlayBuilder,
 
   /// Define the offset from top left corner of FocusNode.rect for label placement
-  final Offset offset = const Offset(-8.0, -8.0),
+  final Offset hintOffset = const Offset(-8.0, -8.0),
 
   /// If provided, this method is called when a hint is activated. It can return
   ///  * [HintActivateResult.handled] => The default activation is skipped
@@ -115,7 +115,7 @@ class _VimiumState extends State<Vimium> {
         hints: _hintOverlayActive ? _overlays : [],
         typedText: _typedText,
         overlayBuilder: widget.hintOverlayBuilder,
-        offset: widget.offset,
+        offset: widget.hintOffset,
         child: widget.child,
       ),
     );
