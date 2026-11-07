@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vimium/src/hint_overlay_data.dart';
 import 'package:flutter_vimium/src/utils.dart';
@@ -17,6 +19,9 @@ class const HintsOverlay({
 }) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final viewPadding = MediaQuery.viewPaddingOf(context);
+    final minX = viewPadding.left;
+    final minY = viewPadding.top;
     return Stack(
       fit: .passthrough,
       children: [
@@ -28,8 +33,8 @@ class const HintsOverlay({
             return SizedBox.shrink();
           }
           return Positioned(
-            left: hint.rect.left + offset.dx,
-            top: hint.rect.top + offset.dy,
+            left: max(minX, hint.rect.left + offset.dx),
+            top: max(minY, hint.rect.top + offset.dy),
             child: overlayBuilder != null
                 ? overlayBuilder!(
                     context,
