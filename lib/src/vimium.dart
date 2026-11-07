@@ -7,8 +7,16 @@ import 'package:flutter_vimium/src/hint_overlay_data.dart';
 import 'package:flutter_vimium/src/hints_overlay.dart';
 import 'package:flutter_vimium/src/utils.dart';
 
-enum HintActivateResult { handled, ignored }
+/// Return value for [Vimium.onHintActivate].
+enum HintActivateResult {
+  /// Blocks default handling of hint activation.
+  handled,
 
+  /// Allow default handling of hint activation.
+  ignored,
+}
+
+/// Shortcut actions for [Vimium.shortcuts].
 enum VimumAction {
   activateHintOverlay,
   scrollLeft,
@@ -17,7 +25,12 @@ enum VimumAction {
   scrollDown,
   scrollUpPage,
   scrollDownPage,
+
+  /// Leave insert mode or abort active hint overlay
   escape,
+
+  /// Enter insert mode where all shortcuts are ignored except for those
+  /// with escape action.
   insertMode,
 }
 
@@ -40,6 +53,10 @@ enum VimumAction {
 ///  * [hintOffset] offset from FocusNode.rect top left corner for overlays.
 ///  * [autofocus] allow disabling autofocus on Focus node created.
 ///  * [onHintActivate] provides ability to intercept/handle activated hints yourself.
+///
+/// Place this widget fairly high up in the widget tree so that it encapsulates overlays
+/// that your UI package creates while also still being within the app. For material_ui
+/// this is can be solved by using the builder parameter of MaterialApp.
 class const Vimium({
   /// Key used to activate hints overlay
   final Map<SingleActivator, VimumAction> shortcuts = const {
@@ -89,6 +106,7 @@ class const Vimium({
   /// to read keyboard input.
   final bool autofocus = true,
 
+  /// The rest of your app or screen.
   required final Widget child,
   super.key,
 }) extends StatefulWidget {
