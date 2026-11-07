@@ -1,14 +1,24 @@
 
-Provides vim inspired navigation to your flutter apps. Inspired by
+Provides vim inspired navigation to your flutter apps including alphabet hint navigation. Inspired by
 browser extensions such as vimium and vimium-c.
-
-The package is independent of UI packages and provide default (yellow) hint
-style, but you can easily provide your own using your UI package of
-choice. The example app shows how to do this for material_ui using purple Badge widgets.
 
 ![Short demo clip](docs/demo_clip_short_1x.webp)
 
 Also see [longer demo clip](docs/demo_clip_1x.webp) showing of also dialogs and scrolling down with `d`.
+
+
+## Features
+
+* Random access to user interfaces using keyboard instead of having to use sequential navigation using TAB key.
+* hjkl + ud Scroll
+* UI package independent with default style (yellow hint overlay) that can be overridden.
+
+
+## Use cases
+
+* Accessibility
+* Keyboard users
+
 
 ## Shortcuts
 
@@ -29,8 +39,6 @@ Also see [longer demo clip](docs/demo_clip_1x.webp) showing of also dialogs and 
 3. User types the letters on any hint overlay to activate it
 4. Upon activation Vimium will set focus to the target FocusNode and then invoke ActivateIntent on it, causing
    buttons to be clicked etc.
-
-![Clip of alphabet hint navigation]()
 
 
 ## Getting started
@@ -53,6 +61,7 @@ Also see [longer demo clip](docs/demo_clip_1x.webp) showing of also dialogs and 
 
 4. Start your app and press the `f` key to enter Alphabet hint mode. For scroll shortcuts to work, the primaryFocus need to be within a scroll view. You may need to press `tab` or use `f` to move focus first before you can scroll.
 
+
 ## Configuration:
 
 You can optionally customize the look and behavior of the Vimium experience using these parameters:
@@ -63,3 +72,13 @@ You can optionally customize the look and behavior of the Vimium experience usin
 * `hintCharacters` - customize the alphabet. Preferable use letters on the home row of the active keyboard layout.
 * `onHintActivate` - provide a custom handler for when a hint is activated that can block or permit the default activation.
 * `autofocus` - optionally disable autofocus on the Focus node of Vimium
+
+
+## Example
+
+The example app demonstrates:
+* Custom overlay hints for material_ui using purple Badge widgets.
+* Setting hintCharacters to home row of active layout using super_keyboard_layout package.
+* Scoped navigation in dialogs and dropdown overlays.
+* Text field can be navigated to with hints, but when focused user can type directly without
+  having to use insert mode. Use TAB key to leave the text field.
