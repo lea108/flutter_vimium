@@ -21,7 +21,7 @@ enum VimumAction {
   insertMode,
 }
 
-/// Provide Vimium-inspired keyboard navigaiton for Flutter apps.
+/// Provide Vimium-inspired keyboard navigation for Flutter apps.
 ///
 /// When user taps F, it obtains a list of all FocusNodes that
 ///  * can be traversed
@@ -94,6 +94,13 @@ class const Vimium({
 }) extends StatefulWidget {
   @override
   State<Vimium> createState() => _VimiumState();
+
+  /// Simplified set of shortcuts that only includes shortcuts
+  /// for hint navigation
+  static Map<SingleActivator, VimumAction> hintNavigationShortcuts = const {
+    SingleActivator(.keyF): .activateHintOverlay,
+    SingleActivator(.escape): .escape,
+  };
 }
 
 class _VimiumState extends State<Vimium> {
