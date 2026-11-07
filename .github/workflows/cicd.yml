@@ -1,0 +1,22 @@
+name: cicd
+
+env:
+  FLUTTER_MIN_VERSION: '3.47.0'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+    - run: flutter pub get
+    - run: flutter test
