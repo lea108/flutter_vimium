@@ -11,6 +11,28 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+      - name: "Analyze with lowest supported version"
+        uses: invertase/github-action-dart-analyzer@v3
+        with:
+          fatal-infos: true
+
+  analyze-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+      - name: "Analyze with latest stable"
+        uses: invertase/github-action-dart-analyzer@v3
+        with:
+          fatal-infos: true
+
   test:
     runs-on: ubuntu-latest
     steps:
