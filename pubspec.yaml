@@ -1,7 +1,7 @@
 name: flutter_vimium
 description: "A Vimium clone for Flutter apps"
 version: 0.0.1
-homepage:
+repository: https://github.com/lea108/flutter_vimium
 
 environment:
   sdk: ^3.13.0
