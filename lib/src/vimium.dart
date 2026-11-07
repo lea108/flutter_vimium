@@ -152,9 +152,11 @@ class _VimiumState extends State<Vimium> {
     }
 
     _prepareOverlays();
-    setState(() {
-      _hintOverlayActive = true;
-    });
+    if (_overlays.isNotEmpty) {
+      setState(() {
+        _hintOverlayActive = true;
+      });
+    }
   }
 
   void _disableOverlay() {
@@ -310,7 +312,11 @@ class _VimiumState extends State<Vimium> {
       return !rect.isEmpty && rect.overlaps(screenRect);
     }).toList();
 
-    if (targets.isEmpty) return;
+    if (targets.isEmpty) {
+      _overlays = [];
+      _maxHintLength = 0;
+      return;
+    }
     final hints = generateHintList(targets.length, widget.hintCharacters);
 
     _overlays = List<HintOverlayData>.generate(targets.length, (i) {
