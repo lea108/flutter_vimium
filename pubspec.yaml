@@ -1,6 +1,6 @@
 name: flutter_vimium
 description: "Provides vim inspired navigation to your flutter apps including alphabet hint navigation. Inspired by browser extensions such as vimium and vimium-c."
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/lea108/flutter_vimium
 
 environment:
