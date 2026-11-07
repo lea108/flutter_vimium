@@ -72,12 +72,6 @@ class const Vimium({
     SingleActivator(.keyI): .insertMode,
   },
 
-  /// Initial delay before input repetition for select VimiumActions
-  final Duration initialRepeatDelay = const Duration(milliseconds: 800),
-
-  /// Repeat delay after initial repeat delay for select VimiumActions
-  final Duration repeatDelay = const Duration(milliseconds: 300),
-
   /// A string with all the characters to use in hint overlays.
   ///
   /// Typically this would be the home row of the active keyboard layout or
