@@ -1,0 +1,25 @@
+name: flutter_vimium_example
+description: "Example for flutter_vimium"
+version: 0.0.1
+homepage:
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_vimium:
+    path: ../
+  material_ui: ^1.10.0
+  super_keyboard_layout: ^0.9.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
