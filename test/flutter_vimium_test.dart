@@ -6,14 +6,14 @@ void main() {
   test('generateHintList - more hints than characters', () {
     final hints = generateHintList(5, 'abc');
     expect(hints, hasLength(5));
-    expect(hints, equals(['aa', 'ba', 'ca', 'ab', 'bb']));
+    expect(hints, equals(['ac', 'ba', 'cb', 'aa', 'bb']));
   });
   test('generateHintList - more hints than characters (2)', () {
     final hints = generateHintList(20, 'abcde');
     expect(hints, hasLength(20));
     // dart format off
-    expect(hints, equals(['aa', 'ba', 'ca', 'da', 'ab', 'bb', 'cb', 'db', 'ac', 'bc',
-                          'e', 'cc', 'dc', 'ad', 'bd', 'cd', 'dd', 'ae', 'be', 'ce']));
+    expect(hints, equals(['ac', 'bd', 'ce', 'da', 'ad', 'be', 'ca', 'db', 'ae', 'ba',
+                          'e', 'cb', 'dc', 'aa', 'bb', 'cc', 'dd', 'ab', 'bc', 'cd']));
     // dart format on
   });
   test('generateHintList - equal n hints and n characters', () {

@@ -20,19 +20,21 @@ List<String> generateHintList(int n, String characters) {
 
   // Minimum number of prefixes needed.
   final minPrefixes = (n - nSlots + base - 2) ~/ (base - 1);
-
   // Prefer at least 4 different prefixes for longer hints.
   final nPrefixes = max(minPrefixes, min(4, nSlots));
 
-  final nShort = nSlots - nPrefixes;
-  final nLong = n - nShort;
+  final nShort = nSlots - nPrefixes; // n hints of length `width - 1`
+  final nLong = n - nShort; // n hints of length `width`
 
   final result = <String>[];
 
   // Spread longer hints across different prefixes.
   for (var i = 0; i < nLong; i++) {
     final prefix = i % nPrefixes;
-    final suffix = i ~/ nPrefixes;
+    // +2 on suffix makes it so it prefers to have the suffix a bit away
+    // from the prefix finger given that characters is the home row and
+    // there isn't too many hints to generate.
+    final suffix = (prefix % base + 2 + i ~/ nPrefixes) % base;
     result.add(_encode(characters, prefix * base + suffix, width));
   }
 
