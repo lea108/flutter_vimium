@@ -27,7 +27,7 @@ showing of also dialogs and scrolling down with `d`.
 * `h`: Scroll left
 * `j`: Scroll down
 * `k`: Scroll up
-* `l`: Scroll left
+* `l`: Scroll right
 * `u`: Scroll up full page
 * `d`: Scroll down full page
 * `i`: Enter insert mode where all input is ignored until you press `Escape`
