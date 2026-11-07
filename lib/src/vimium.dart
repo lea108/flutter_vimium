@@ -40,6 +40,7 @@ enum VimumAction {
 ///  * can be traversed
 ///  * are visible on screen (at least partially)
 ///  * has a context
+///
 /// Using these focus nodes it builds an overlay with hint labels that
 /// the user has to type using the keyboard to activate it.
 ///
