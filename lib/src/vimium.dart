@@ -129,6 +129,12 @@ class _VimiumState extends State<Vimium> {
   int _maxHintLength = 0;
 
   @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Focus(
       key: _focusKey,
