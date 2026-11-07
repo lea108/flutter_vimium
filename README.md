@@ -6,9 +6,9 @@ The package is independent of UI packages and provide default (yellow) hint
 style, but you can easily provide your own using your UI package of
 choice. The example app shows how to do this for material_ui using purple Badge widgets.
 
-![Short demo clip](demo_clip_short_1x.webp)
+![Short demo clip](docs/demo_clip_short_1x.webp)
 
-Also see [longer demo clip](demo_clip_1x.webp) showing of also dialogs and scrolling down with `d`.
+Also see [longer demo clip](docs/demo_clip_1x.webp) showing of also dialogs and scrolling down with `d`.
 
 ## Shortcuts
 
