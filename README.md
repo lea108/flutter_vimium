@@ -2,9 +2,9 @@
 Provides vim inspired navigation to your flutter apps including alphabet hint navigation. Inspired by
 browser extensions such as vimium and vimium-c.
 
-![Short demo clip](https://github.com/lea108/flutter_vimium/blob/main/doc/demo_clip_short_1x.webp)
+![Short demo clip](https://github.com/lea108/flutter_vimium/blob/main/doc/demo_clip_short_1x.webp?raw=true)
 
-Also see [longer demo clip](https://github.com/lea108/flutter_vimium/blob/main/doc/demo_clip_1x.webp)
+Also see [longer demo clip](https://github.com/lea108/flutter_vimium/blob/main/doc/demo_clip_1x.webp?raw=true)
 showing of also dialogs and scrolling down with `d`.
 
 
