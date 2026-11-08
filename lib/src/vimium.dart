@@ -59,7 +59,7 @@ enum VimiumAction {
 /// Place this widget fairly high up in the widget tree so that it encapsulates overlays
 /// that your UI package creates while also still being within the app. For material_ui
 /// this is can be solved by using the builder parameter of MaterialApp.
-class const Vimium({
+final class const Vimium({
   /// Active set of shortcuts for Vimium.
   ///
   /// If you only want to enable hint navigation you can use
