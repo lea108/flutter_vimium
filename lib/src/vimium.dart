@@ -80,7 +80,7 @@ final class const Vimium({
   ///
   /// Typically this would be the home row of the active keyboard layout or
   /// you may provide a app setting for users to customize this.
-  final String hintCharacters = 'asdfghijkl',
+  final String hintCharacters = 'asdfghjkl',
 
   /// Builder of hint label widget. The label will be offset by [offset] from
   /// (0, 0) of the focusNode.

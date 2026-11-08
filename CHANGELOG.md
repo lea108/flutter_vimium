@@ -4,6 +4,7 @@
 * fix: throw an exception on duplicate characters in hintCharacters
 * fix: old hints could show when hint generation aborted due to zero targets
 * fix: dispose() FocusNode created by Vimium widget
+* fix: there is no 'i' in QWERTY home row
 * fix!: VimumAction renamed to VimiumAction (typo)
 * change!: make Vimium class final
 * docs: fix documented scroll direction of `l` key
