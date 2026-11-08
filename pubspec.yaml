@@ -1,6 +1,6 @@
 name: flutter_vimium
 description: "Improve mouse-free navigation in your Flutter desktop/web apps with hint based keyboard navigation. Inspired by browser extensions such as vimium and vimium-c."
-version: 0.0.4
+version: 0.0.5
 repository: https://github.com/lea108/flutter_vimium
 
 environment:

@@ -1,4 +1,4 @@
-## unreleased
+## 0.0.5
 
 * feat: VimiumController that can observe hint overlay active status and close the hint overlay
 * fix: throw an exception on duplicate characters in hintCharacters
