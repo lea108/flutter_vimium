@@ -1,6 +1,6 @@
 
-Provides vim inspired navigation to your flutter apps including alphabet hint navigation. Inspired by
-browser extensions such as vimium and vimium-c.
+Improve mouse-free navigation in your Flutter desktop/web apps with hint based keyboard navigation.
+Inspired by browser extensions such as vimium and vimium-c.
 
 ![Short demo clip](https://github.com/lea108/flutter_vimium/blob/main/doc/demo_clip_short_1x.webp?raw=true)
 
@@ -10,9 +10,12 @@ showing of also dialogs and scrolling down with `d`.
 
 ## Features
 
+* Easy integration - simply add Vimium() to your app. `*`
 * Random access to user interfaces using keyboard instead of having to use sequential navigation using TAB key.
 * hjkl + ud Scroll
 * UI package independent with default style (yellow hint overlay) that can be overridden.
+
+`*` See [Getting started](#getting-started) for details.
 
 
 ## Use cases
@@ -44,7 +47,8 @@ showing of also dialogs and scrolling down with `d`.
 
 ## Getting started
 
-1. Make sure your works using the keyboard. This step is mostly to test that things that are button-like can receive focus and that dialogs correctly trap focus traversal.
+1. Make sure your app works using the keyboard. This step is mostly to test that things that are button-like
+   can receive focus and that dialogs correctly trap focus traversal.
 2. Install the `flutter_vimium` package
 3. Add a builder for your MaterialApp or similar, depending on the UI kit you use.
 
@@ -84,3 +88,4 @@ The example app demonstrates:
 * Scoped navigation in dialogs and dropdown overlays.
 * Text field can be navigated to with hints, but when focused user can type directly without
   having to use insert mode. Use TAB key to leave the text field.
+* Closing hint overlay using a controller.
