@@ -1,19 +1,22 @@
 import 'dart:math';
 
-/// Generate a list of hints of length [n] using alphabet defined by [characters].
+/// Generate a list of hints of length [n] using alphabet defined by [hintCharacters].
 ///
 /// The hints aim to be as short as possible while not having any duplicate activation
 /// when typing them from beginning to end.
-List<String> generateHintList(int n, String characters) {
-  final base = characters.length;
+List<String> generateHintList(int n, String hintCharacters) {
+  final base = hintCharacters.length;
   if (base == 0) {
-    throw ArgumentError('characters cannot be an empty string');
+    throw ArgumentError('hintCharacters cannot be an empty string');
+  }
+  if (hintCharacters.length != hintCharacters.split('').toSet().length) {
+    throw ArgumentError('hintCharacters must not repeat individual characters');
   }
 
   // base width of hints
   final width = n <= base ? 1 : _logBase(n - 1, base).floor() + 1;
   if (width == 1) {
-    return List<String>.generate(n, (i) => characters[i]);
+    return List<String>.generate(n, (i) => hintCharacters[i]);
   }
 
   final nSlots = pow(base, width - 1).toInt();
@@ -35,13 +38,13 @@ List<String> generateHintList(int n, String characters) {
     // from the prefix finger given that characters is the home row and
     // there isn't too many hints to generate.
     final suffix = (prefix % base + 2 + i ~/ nPrefixes) % base;
-    result.add(_encode(characters, prefix * base + suffix, width));
+    result.add(_encode(hintCharacters, prefix * base + suffix, width));
   }
 
   // Distribute shorter hints throughout the list.
   for (var i = 0; i < nShort; i++) {
     final index = (i + 1) * (result.length + 1) ~/ (nShort + 1);
-    result.insert(index, _encode(characters, nPrefixes + i, width - 1));
+    result.insert(index, _encode(hintCharacters, nPrefixes + i, width - 1));
   }
 
   return result;

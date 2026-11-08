@@ -26,6 +26,18 @@ void main() {
     expect(hints, hasLength(2));
     expect(hints, equals(['a', 'b']));
   });
+  test('generateHintList - zero characters', () {
+    expect(
+      () => generateHintList(2, ''),
+      throwsA(isA<ArgumentError>())
+    );
+  });
+  test('generateHintList - duplicate characters', () {
+    expect(
+      () => generateHintList(2, 'vimium'),
+      throwsA(isA<ArgumentError>())
+    );
+  });
   test('getNMatchedChars', () {
     expect(getNMatchedChars('', ''), equals(0));
     expect(getNMatchedChars('a', 'b'), equals(0));
