@@ -10,14 +10,15 @@ Future<void> main() async {
 
 class ExampleApp extends StatefulWidget {
   final String hintCharacters;
-  const new(this.hintCharacters, {super.key});
+  const ExampleApp(this.hintCharacters, {super.key});
 
   @override
   State<ExampleApp> createState() => _ExampleAppState();
 }
 
 class _ExampleAppState extends State<ExampleApp> {
-  ValueNotifier<bool> customHints = ValueNotifier<bool>(false);
+  final customHints = ValueNotifier<bool>(false);
+  final controller = VimiumController();
 
   @override
   void initState() {
@@ -43,9 +44,10 @@ class _ExampleAppState extends State<ExampleApp> {
           // Let the default activation run
           return .ignored;
         },
+        controller: controller,
         child: child ?? SizedBox.shrink(),
       ),
-      home: HomeScreen(customHints),
+      home: HomeScreen(customHints, controller),
     );
   }
 
@@ -78,7 +80,9 @@ class _ExampleAppState extends State<ExampleApp> {
 
 class HomeScreen extends StatefulWidget {
   final ValueNotifier<bool> customHints;
-  const new(this.customHints, {super.key});
+  final VimiumController controller;
+
+  const HomeScreen(this.customHints, this.controller, {super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -163,16 +167,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void showSnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message), showCloseIcon: true));
+    widget.controller.closeHintOverlay();
   }
 
   void showAbout(BuildContext context) {
     showAboutDialog(context: context, applicationName: 'Vimium Example');
+    widget.controller.closeHintOverlay();
   }
 
   void _onSliderChange(double value) {
     setState(() {
       n = value.round();
     });
+    widget.controller.closeHintOverlay();
   }
 
   void _onDropdownChange(int? value) {
@@ -180,11 +187,13 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       dropdownValue = value;
     });
+    widget.controller.closeHintOverlay();
   }
 
   void _onCheckboxChange(bool? value) {
     if (value == null) return;
     widget.customHints.value = value;
+    widget.controller.closeHintOverlay();
   }
 }
 

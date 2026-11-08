@@ -1,10 +1,13 @@
 ## 0.0.4
 
 * fix: avoid hints ending up partially outside of the screen, fixes#1
+* fix: VimumAction renamed to VimiumAction (typo)
 * remove: drop unused initialRepeatDelay and repeatDelay parameters for Vimium class
 * docs: fix API docs for Vimium.shortcuts
 * docs: fix API docs text layout
 * docs: exclude README animated clips from published dart package to reduce size
+
+BREAKING CHANGE: VimumAction renamed to VimiumAction (typo)
 
 ## 0.0.3
 

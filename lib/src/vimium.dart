@@ -54,6 +54,7 @@ enum VimiumAction {
 ///  * [hintOffset] offset from FocusNode.rect top left corner for overlays.
 ///  * [autofocus] allow disabling autofocus on Focus node created.
 ///  * [onHintActivate] provides ability to intercept/handle activated hints yourself.
+///  * [vimiumController] supply a controller to allow observation and control
 ///
 /// Place this widget fairly high up in the widget tree so that it encapsulates overlays
 /// that your UI package creates while also still being within the app. For material_ui
@@ -104,6 +105,10 @@ class const Vimium({
   /// to read keyboard input.
   final bool autofocus = true,
 
+  /// Provide a VimiumController to allow you to programmatically close
+  /// hints overlay and read/react to active status of hints overlay.
+  final VimiumController? controller,
+
   /// The rest of your app or screen.
   required final Widget child,
   super.key,
@@ -122,15 +127,38 @@ class const Vimium({
 class _VimiumState extends State<Vimium> {
   late final FocusNode _focusNode = FocusNode(skipTraversal: true);
   late final GlobalKey _focusKey = GlobalKey(debugLabel: 'LinkHintsFocusNode');
+  late final VimiumController _internalController = VimiumController();
   bool _insertMode = false;
-  bool _hintOverlayActive = false;
   String _typedText = '';
   List<HintOverlayData> _overlays = [];
   int _maxHintLength = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  VimiumController get _controller => widget.controller ?? _internalController;
+
+  @override
+  void didUpdateWidget(covariant Vimium oldWidget) {
+    // Block opening of hintOverlay by means of replacing the controller.
+    if (oldWidget.controller != widget.controller) {
+      final oldActive =
+          (oldWidget.controller ?? _internalController).isHintOverlayActive;
+      final newController = (widget.controller ?? _internalController);
+      final newActive = newController.isHintOverlayActive;
+      if (newActive && !oldActive) {
+        newController._setHintOverlayActive(false);
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _focusNode.dispose();
+    _internalController.dispose();
     super.dispose();
   }
 
@@ -141,33 +169,36 @@ class _VimiumState extends State<Vimium> {
       focusNode: _focusNode,
       autofocus: widget.autofocus,
       onKeyEvent: _onKeyEvent,
-      child: HintsOverlay(
-        hints: _hintOverlayActive ? _overlays : [],
-        typedText: _typedText,
-        overlayBuilder: widget.hintOverlayBuilder,
-        offset: widget.hintOffset,
-        child: widget.child,
+      child: ListenableBuilder(
+        listenable: _controller,
+        builder: (context, _) {
+          return HintsOverlay(
+            hints: _controller.isHintOverlayActive ? _overlays : [],
+            typedText: _typedText,
+            overlayBuilder: widget.hintOverlayBuilder,
+            offset: widget.hintOffset,
+            child: widget.child,
+          );
+        },
       ),
     );
   }
 
   /// Key handler for when overlay is enabled
   void _onEnableOverlay() {
-    if (_hintOverlayActive) {
+    if (_controller.isHintOverlayActive) {
       return;
     }
 
     _prepareOverlays();
     if (_overlays.isNotEmpty) {
-      setState(() {
-        _hintOverlayActive = true;
-      });
+      _controller._setHintOverlayActive(true);
     }
   }
 
   void _disableOverlay() {
     setState(() {
-      _hintOverlayActive = false;
+      _controller._setHintOverlayActive(false);
       _typedText = '';
     });
   }
@@ -194,7 +225,7 @@ class _VimiumState extends State<Vimium> {
     }
 
     // Normal mode (without active hint overlay)
-    if (!_hintOverlayActive) {
+    if (!_controller.isHintOverlayActive) {
       for (final shortcut in widget.shortcuts.keys) {
         if (shortcut.accepts(event, HardwareKeyboard.instance)) {
           final action = widget.shortcuts[shortcut]!;
@@ -335,5 +366,33 @@ class _VimiumState extends State<Vimium> {
   bool get _isEditingText {
     final context = primaryFocus?.context;
     return context?.findAncestorStateOfType<EditableTextState>() != null;
+  }
+}
+
+/// VimiumController allow you to externally observe and control
+/// some aspects of Vimium.
+///
+/// Use [addListener] to observe changes.
+final class VimiumController extends ChangeNotifier {
+  bool _hintOverlayActive = false;
+
+  /// Read the active (visible) state of hint overlay.
+  bool get isHintOverlayActive => _hintOverlayActive;
+
+  void _setHintOverlayActive(bool active) {
+    if (_hintOverlayActive != active) {
+      _hintOverlayActive = active;
+      notifyListeners();
+    }
+  }
+
+  /// Close the hint overlay.
+  ///
+  /// It does not abort an concurrent ongoing handling of hint activation.
+  /// Keyboard input handling checks [isHintOverlayActive] but if that
+  /// check was passed the remaining activation of the hint target carries
+  /// on unless you abort it with [Vimium.onHintActivation].
+  void closeHintOverlay() {
+    _setHintOverlayActive(false);
   }
 }

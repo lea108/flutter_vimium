@@ -68,11 +68,12 @@ showing of also dialogs and scrolling down with `d`.
 You can optionally customize the look and behavior of the Vimium experience using these parameters:
 
 * `shortcuts` - provide a custom shortcuts map.
-* `hintOverlayBuilder` - customize the hint overlays
-* `hintOffset` - customize hint overlay offset
+* `hintOverlayBuilder` - customize the hint overlays.
+* `hintOffset` - customize hint overlay offset.
 * `hintCharacters` - customize the alphabet. Preferable use letters on the home row of the active keyboard layout.
 * `onHintActivate` - provide a custom handler for when a hint is activated that can block or permit the default activation.
-* `autofocus` - optionally disable autofocus on the Focus node of Vimium
+* `autofocus` - optionally disable autofocus on the Focus node of Vimium.
+* `controller` - optionally provide a VimiumController for observation and to be able to close hint overlay.
 
 
 ## Example
