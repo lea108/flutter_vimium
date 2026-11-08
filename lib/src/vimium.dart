@@ -17,7 +17,7 @@ enum HintActivateResult {
 }
 
 /// Shortcut actions for [Vimium.shortcuts].
-enum VimumAction {
+enum VimiumAction {
   activateHintOverlay,
   scrollLeft,
   scrollRight,
@@ -63,7 +63,7 @@ class const Vimium({
   ///
   /// If you only want to enable hint navigation you can use
   /// [Vimium.hintNavigationShortcuts].
-  final Map<SingleActivator, VimumAction> shortcuts = const {
+  final Map<SingleActivator, VimiumAction> shortcuts = const {
     SingleActivator(.keyF): .activateHintOverlay,
     SingleActivator(.keyH): .scrollLeft,
     SingleActivator(.keyJ): .scrollDown,
@@ -113,7 +113,7 @@ class const Vimium({
 
   /// Simplified set of shortcuts that only includes shortcuts
   /// for hint navigation
-  static Map<SingleActivator, VimumAction> hintNavigationShortcuts = const {
+  static Map<SingleActivator, VimiumAction> hintNavigationShortcuts = const {
     SingleActivator(.keyF): .activateHintOverlay,
     SingleActivator(.escape): .escape,
   };
@@ -249,7 +249,7 @@ class _VimiumState extends State<Vimium> {
     return false;
   }
 
-  KeyEventResult _invokeNormalModeAction(VimumAction action) {
+  KeyEventResult _invokeNormalModeAction(VimiumAction action) {
     switch (action) {
       case .activateHintOverlay:
         _onEnableOverlay();
